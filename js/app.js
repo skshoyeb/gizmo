@@ -103,24 +103,24 @@ var app = angular.module('starter', ['ionic'])
     // start monitraing for the devices.
 
     
-    $.getJSON( "http://elasticsearch.techaspect.com:8090/RestServiceImpl.svc/json", function(data) {
+  /*  $.getJSON( "http://elasticsearch.techaspect.com:8090/RestServiceImpl.svc/json", function(data) {
       console.log( "success : " );
-      console.log(data);
-      var serverData  = JSON.parse(data.JSONDataResult);
-      // var serverData  = [{ID: 2,
-      //                     Major: 1,
-      //                     Message: "10% off on cart total",
-      //                     Minor: 1,
-      //                     ProductDescription: "10% off on cart total",
-      //                     ProductName: "SamsungS2",
-      //                     UUID: "52414449-5553-4E45-5457-4F524B53434F"},
-      //                     {ID: 1,
-      //                     Major: 1,
-      //                     Message: "100% off on cart total",
-      //                     Minor: 1,
-      //                     ProductDescription: "100% off on cart total",
-      //                     ProductName: "SamsungS4",
-      //                     UUID: "5AFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF"}];
+      console.log(data); */
+      //var serverData  = JSON.parse(data.JSONDataResult);
+       var serverData  = [{ID: 2,
+                           Major: 1,
+                           Message: "10% off on cart total",
+                           Minor: 1,
+                           ProductDescription: "10% off on cart total",
+                           ProductName: "SamsungS2",
+                           UUID: "52414449-5553-4E45-5457-4F524B53434F"},
+                           {ID: 1,
+                           Major: 1,
+                          Message: "100% off on cart total",
+                          Minor: 1,
+                          ProductDescription: "100% off on cart total",
+                          ProductName: "SamsungS4",
+                          UUID: "5AFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF"}];
       for (var i = 0 ; i< serverData.length; i++) {
         var d = serverData[i];
         console.log(d);
@@ -140,7 +140,7 @@ var app = angular.module('starter', ['ionic'])
       };
       console.log(mRegions);
       startMonitoringAndRanging();
-    });
+//    });
 
     
   });
