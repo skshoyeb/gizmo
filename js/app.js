@@ -101,7 +101,7 @@ var app = angular.module('starter', ['ionic'])
     document.addEventListener('resume', function(){appInBackground=false}, false);
 
     // start monitraing for the devices.
-
+alert("test");
     
   /*  $.getJSON( "http://elasticsearch.techaspect.com:8090/RestServiceImpl.svc/json", function(data) {
       console.log( "success : " );
