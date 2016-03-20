@@ -66,6 +66,7 @@
 //     }
 //   ];
   // Nearest ranged beacon.
+  	alert("test1");
   var mRegions=[];
   var appInBackground;
   var mNearestBeacon = null;
@@ -90,6 +91,7 @@ var app = angular.module('starter', ['ionic'])
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
+
     if(window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
@@ -101,7 +103,6 @@ var app = angular.module('starter', ['ionic'])
     document.addEventListener('resume', function(){appInBackground=false}, false);
 
     // start monitraing for the devices.
-alert("test");
     
   /*  $.getJSON( "http://elasticsearch.techaspect.com:8090/RestServiceImpl.svc/json", function(data) {
       console.log( "success : " );
