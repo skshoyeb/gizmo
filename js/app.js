@@ -66,7 +66,6 @@
 //     }
 //   ];
   // Nearest ranged beacon.
-  	alert("test1");
   var mRegions=[];
   var appInBackground;
   var mNearestBeacon = null;
@@ -91,7 +90,6 @@ var app = angular.module('starter', ['ionic'])
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
-
     if(window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
@@ -108,20 +106,28 @@ var app = angular.module('starter', ['ionic'])
       console.log( "success : " );
       console.log(data); */
       //var serverData  = JSON.parse(data.JSONDataResult);
-       var serverData  = [{ID: 2,
-                           Major: 1,
-                           Message: "10% off on cart total",
-                           Minor: 1,
-                           ProductDescription: "10% off on cart total",
-                           ProductName: "SamsungS2",
-                           UUID: "52414449-5553-4E45-5457-4F524B53434F"},
-                           {ID: 1,
-                           Major: 1,
-                          Message: "100% off on cart total",
-                          Minor: 1,
-                          ProductDescription: "100% off on cart total",
-                          ProductName: "SamsungS4",
-                          UUID: "5AFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF"}];
+	  alert("creating mock beacon list");
+       var serverData  = 
+   [
+     {
+        ID: '1',
+        UUID: 'B395B263-C7EF-46E2-B594-5B6297C99578',
+        Major: 1,
+        Minor: 1,
+        Message:"get 50% discount ",
+        ProductDescription: "GET-50",
+        ProductName:"Nike - JUST DO IT"
+      },
+      {
+        ID: '2',
+        UUID: '5AFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF',
+        Major: 1,
+        Minor: 2,
+        Message:"90% off for you",
+        ProductDescription: "MEGA-SALE",
+        ProductName: "ADIDAS"
+      }
+    ];
       for (var i = 0 ; i< serverData.length; i++) {
         var d = serverData[i];
         console.log(d);
@@ -213,9 +219,9 @@ app.controller('offerCtrl', function($scope, $ionicModal, $state) {
       pCode = $scope.currentBeacon.promotionCode;
       pOwner =$scope.currentBeacon.owner;
       URL = $scope.currentBeacon.url;
-      // $state.go('product');
-      console.log("go to the page " + currentBeacon.pageUrl);
-    window.location.href = currentBeacon.pageUrl;
+       $state.go('product');
+      //console.log("go to the page " + currentBeacon.pageUrl);
+    //window.location.href = currentBeacon.pageUrl;
     }
 
     // check for app in background or not the show the notification.
@@ -234,6 +240,7 @@ app.controller('offerCtrl', function($scope, $ionicModal, $state) {
 $scope.showOffer();
 // event lisener on the offer page for the detection of the new beacon
   document.addEventListener("new-beacon", function(e) {
+	alert("debug: offerpage - new beacon detected");
     console.log("id in event trigger : "+ mNearestBeacon ); // Prints "Example of an event"
     $scope.showOffer();
   });
@@ -243,6 +250,7 @@ $scope.showOffer();
 app.controller('searchCtrl', function($scope, $ionicModal,$state) {
   console.log("in search page");
   document.addEventListener("new-beacon", function(e) {
+	  alert("debug: searchpage - new beacon detected");
       console.log("id in event trigger : "+ mNearestBeacon ); // Prints "Example of an event"
 
       $state.go('offer');
@@ -280,10 +288,21 @@ function startMonitoringAndRanging()
       // console.log("Beacon in region"+JSON.stringify(result));
       console.log("Beacon in region part 2: "+JSON.stringify(result.beacons));
       if (result.beacons.length) {
+		    	
         updateNearestBeacon(result.beacons);
-      };
+      }
     }
-
+	alert("updating a mock nearest beacon")
+	var sample = [{
+					id: '1',
+					uuid: 'B395B263-C7EF-46E2-B594-5B6297C99578',
+					major: 1,
+					minor: 1,
+					message:"get 50% discount ",
+					promotionCode: "GET-50",
+					owner:"Nike - JUST DO IT"
+				}];
+	updateNearestBeacon(sample);
     function onError(errorMessage)
     {
       console.log('Monitoring beacons did fail: ' + errorMessage);
@@ -334,16 +353,18 @@ function startMonitoringAndRangingRegion(region, errorCallback)
 function updateNearestBeacon(beacons)
   {
     var b=beacons[0];
+
     var beaconId = getBeconId(b);
     console.log(JSON.stringify(beacons));
     if (!mNearestBeacon)
     {
-      mNearestBeacon = beaconId;
+	   mNearestBeacon = beaconId;
       // Dispatch/Trigger/Fire the event
       document.dispatchEvent(newBeaconEvent);
     }
     else
     {
+			alert("test55");
       if (beaconId != mNearestBeacon){
         mNearestBeacon = beaconId;
         
@@ -354,6 +375,7 @@ function updateNearestBeacon(beacons)
     }
   }
   function getBeconId(b){
+	  console.log(mRegions);
     for (var i = 0 ; i < mRegions.length ; i++) {
       var uuid = mRegions[i].uuid ,
           minor = mRegions[i].minor,
